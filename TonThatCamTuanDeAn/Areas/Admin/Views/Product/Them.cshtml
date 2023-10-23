@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Them";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="d-flex justify-content-center">
+    <div class="col-6 px-5 pt-5 border rounded-3 shadow-lg">
+        <h2 class="text-center fw-bold pb-4">Thêm thông tin khoa</h2>
+        <hr />
+        <form action="them" method="post" enctype="multipart/form-data">
+            <div class="mb-4">
+                @if (ViewData["ThembiThieu"] != "")
+                {
+                    <div class="alert alert-primary" role="alert">
+                        @ViewData["ThembiThieu"]
+                    </div>
+                }
+
+                <label for="productname" class="form-label fw-bolder">Ten San Pham</label>
+                <input type="text" class="form-control" id="productname" name="productname" value="" aria-describedby="text">
+            </div>
+            <div class="mb-4">
+                <label for="price" class="form-label fw-bolder">Gia Tien</label>
+                <input type="number" class="form-control" id="price" name="price" value="" aria-describedby="text">
+            </div>
+            <div class="mb-4">
+                <label for="hinhanh" class="form-label fw-bolder">Ảnh</label>
+                <div class="d-flex justify-content-center align-items-center py-2">
+                    <img id="showimage" style="width: 477px; height: 477px;" src="~/images/noimage1.jpg" alt="..." />
+                </div>
+                <input type="file" class="form-control" id="image" name="image" onchange="readURL(this)" aria-describedby="image">
+            </div>
+            <div class="mb-4">
+                <label for="detail" class="form-label fw-bolder">Chi Tiet</label>
+                <input type="text" class="form-control" id="detail" name="detail" value="" aria-describedby="text">
+            </div>
+            <div class="mb-4">
+                <label for="material" class="form-label fw-bolder">Chất Liệu</label>
+                <input type="text" class="form-control" id="material" name="material" value="" aria-describedby="text">
+            </div>
+            <div class="mb-4">
+                <label for="size" class="form-label fw-bolder">Kich Thuoc</label>
+                <input type="text" class="form-control" id="size" name="size" value="" aria-describedby="text">
+            </div>
+            <hr />
+            <div class="d-flex align-items-center justify-content-center my-5 gap-5">
+                <button type="submit" id="themgiohang" class="btn btn-primary px-4 py-2">Thêm thông tin</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // nay la de luc upload hinh thi se hien len cai hinh, neu muon upload nhieu hinh thi bo cai input.files[0]
+    //cau ma  if (input.files && input.files[0]) la do xem co hinh dau voi hinh ke tiep ko co thi no moi thuc hien
+    //FileReader dung de doc file
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#showimage').attr('src', e.target.result).width(477).height(477); //jquery thuong co dau $, # = id hinh anh, attr('src', e.target.result) la doc hinh roi up len lai cai src
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+

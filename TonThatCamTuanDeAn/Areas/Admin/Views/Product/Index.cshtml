@@ -1,0 +1,165 @@
+﻿@model IEnumerable<TonThatCamTuanDeAn.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<form class="col-3 d-flex flex-row gap-2" style="align-items: baseline;"
+      asp-area="Admin"
+      asp-controller="Product"
+      asp-action=""
+      method="get">
+    <div class="mb-3">
+        <input type="text" class="form-control" id="timkiem" name="timkiem" aria-describedby="tim kiem noi dung">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<table class="table table-striped overflow-scroll">
+    <thead>
+        <tr class="text-center">
+            <th scope="col">STT</th>
+            <th scope="col">Ten san pham</th>
+            <th scope="col">Gia Tien</th>
+            <th scope="col">Image</th>
+            <th scope="col">Chi Tiet</th>
+            <th scope="col">Chat Lieu</th>
+            <th scope="col">Kich Thuoc</th>
+            <th scope="col">Filter</th>
+            @* <th scope="col">Trạng thái</th> *@
+            <th scope="col">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            int i = 0;
+            foreach (var item in Model)
+            {
+                i++;
+                
+                <tr>
+                    <td class="text-center">@i</td>
+                    <td class="text-center">@item.ProductName</td>
+                    <td class="text-center">@item.Price</td>
+                    <td class="text-center">
+                        <img src="@item.Image" style="width: 50%;">
+                    </td>
+                    <td class="text-center">@item.Detail</td>
+                    <td class="text-center">@item.Material</td>
+                    <td class="text-center">@item.Size</td>
+                    <td class="text-center">@item.Filter</td>
+                    @* <td class="text-center @((bool)item.IsActive ? "text-success" : "text-danger")">
+            @((bool)item.IsActive ? "Kích hoạt" : "Tạm khóa")
+            </td> *@
+                    <td class="text-center">
+
+                        <!-- Button trigger modal -->
+                        <button type="button" style="border: none; background: none" data-bs-toggle="modal" data-bs-target="#delete-@item.Id">
+                            <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="delete-@item.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc bạn muốn xóa dữ liệu</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <a class="px-2" href="@Url.Action("Xoa", "Product", new { id = item.Id})">
+                                            <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-@item.Id">
+                            edit
+                        </button>
+                       
+                        <!-- Modal -->
+
+                        <div class="modal fade" id="edit-@item.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" onClick="refreshPage()" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form asp-area="Admin" asp-controller="Product" asp-action="CapNhat" method="post" enctype="multipart/form-data">
+                                            <input type="text" id="id" name="id" value="@item.Id" aria-describedby="text" hidden>
+                                            <div class="mb-4">
+                                                <label for="productname" class="form-label fw-bolder">Ten San Pham</label>
+                                                <input type="text" class="form-control" id="productname-@item.Id" name="productname" value="@item.ProductName" aria-describedby="text">
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="price" class="form-label fw-bolder">Gia Tien</label>
+                                                <input type="number" class="form-control" id="price-@item.Id" name="price" value="@item.Price" aria-describedby="text">
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="hinhanh" class="form-label fw-bolder">Ảnh</label>
+                                                <div class="d-flex justify-content-center align-items-center py-2">
+                                                    <img id="showimage" style="width: 100%; height: 100%;" src="@item.Image" alt="..." />
+                                                </div>
+                                                <input type="file" class="form-control" id="image" name="image" onchange="readURL(this)" aria-describedby="image">
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="detail" class="form-label fw-bolder">Chi Tiet</label>
+                                                <input type="text" class="form-control" id="detail" name="detail" value="@item.Detail" aria-describedby="text">
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="material" class="form-label fw-bolder">Chất Liệu</label>
+                                                <input type="text" class="form-control" id="material" name="material" value="@item.Material" aria-describedby="text">
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="size" class="form-label fw-bolder">Kich Thuoc</label>
+                                                <input type="text" class="form-control" id="size" name="size" value="@item.Size" aria-describedby="text">
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="filter" class="form-label fw-bolder">Filter</label>
+                                                <input type="text" class="form-control" id="filter" name="filter" value="@item.Filter" aria-describedby="text">
+                                            </div>
+                                            <hr />
+                                            <div class="d-flex align-items-center justify-content-center my-5 gap-5">
+                                                <button type="submit" id="themgiohang" class="btn btn-primary px-4 py-2">Cập nhật thông tin</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <caption>
+                Không có dữ liệu
+            </caption>
+        }
+    </tbody>
+</table>
+
+<script>
+    function refreshPage() {
+        window.location.reload();
+    }
+    function readURL(input) {
+        
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#showimage').attr('src', e.target.result).width(477).height(477); //jquery thuong co dau $, # = id hinh anh, attr('src', e.target.result) la doc hinh roi up len lai cai src
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }  
+</script>
