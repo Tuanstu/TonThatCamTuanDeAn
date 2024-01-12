@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TonThatCamTuanDeAn.Models;
+using TonThatCamTuanDeAn.Models.Entity;
 
 #nullable disable
 
@@ -22,7 +22,7 @@ namespace TonThatCamTuanDeAn.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("TonThatCamTuanDeAn.Models.Admin", b =>
+            modelBuilder.Entity("TonThatCamTuanDeAn.Models.Entity.Admin", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(100)
@@ -37,7 +37,7 @@ namespace TonThatCamTuanDeAn.Migrations
                     b.ToTable("Admin");
                 });
 
-            modelBuilder.Entity("TonThatCamTuanDeAn.Models.Order", b =>
+            modelBuilder.Entity("TonThatCamTuanDeAn.Models.Entity.Order", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(100)
@@ -58,7 +58,7 @@ namespace TonThatCamTuanDeAn.Migrations
                     b.ToTable("Order");
                 });
 
-            modelBuilder.Entity("TonThatCamTuanDeAn.Models.Product", b =>
+            modelBuilder.Entity("TonThatCamTuanDeAn.Models.Entity.Product", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -71,8 +71,8 @@ namespace TonThatCamTuanDeAn.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("Material")
                         .HasColumnType("nvarchar(max)");
@@ -92,7 +92,7 @@ namespace TonThatCamTuanDeAn.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("TonThatCamTuanDeAn.Models.User", b =>
+            modelBuilder.Entity("TonThatCamTuanDeAn.Models.Entity.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(100)

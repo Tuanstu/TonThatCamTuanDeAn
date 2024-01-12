@@ -1,0 +1,38 @@
+﻿@* 
+@{
+    ViewData["Title"] = "DangNhap";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>DangNhap</h1>
+ *@
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DangNhap</title>
+    <link rel="stylesheet" href="~/Taikhoantemp/taikhoan.css" asp-append-version="true" />
+</head>
+<body style="background-image: url('/images/Signupwallpaper.jpg'); height: 760px; display: flex; justify-content: center; align-items: center;">
+    <div class="form-box" style="background-image: url('/images/Repeatingwallpattern.jpg')">
+        <form class="form" asp-area="Admin" asp-controller="TaiKhoan" asp-action="DangNhap" method="post">
+            <span class="title" style="color: white">Hi</span>
+            <div class="form-container">
+                @* <input type="text" name="Username" class="input" placeholder="Username"> *@
+                <input type="email" name="Email" class="input" placeholder="Email">
+                <input type="password" name="Password" class="input" placeholder="Password">
+               
+            </div>
+            <button type="submit" style="background: rgba(76, 175, 80, 0.9)">Login</button>
+        </form>
+        <div class="form-section" style="background: rgba(20, 120, 100, 1)">
+            <p style="color: white">Have an account? <a asp-area="Admin" asp-controller="TaiKhoan" asp-action="DangKy">Register</a> </p>
+        </div>
+    </div>
+</body>
+</html>

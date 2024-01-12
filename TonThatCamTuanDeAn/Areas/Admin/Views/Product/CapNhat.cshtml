@@ -1,0 +1,135 @@
+﻿@model TonThatCamTuanDeAn.Models.Product.ViewModelProduct
+
+@{
+    ViewData["Title"] = "Them";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="d-flex justify-content-center">
+    <div class="col-6 px-5 pt-5 border rounded-3 shadow-lg">
+        <h2 class="text-center fw-bold pb-4">Edit thông tin khoa</h2>
+        <hr />
+        <form asp-area="Admin" asp-controller="Product" asp-action="CapNhat" method="post" enctype="multipart/form-data">
+            <input name="id" type="text" class="form-control" id="" value="@Model.Id" aria-describedby="text" hidden>
+
+            <div class="mb-4">
+                @*  @if (ViewData["ThembiThieu"] != "")
+                {
+                <div class="alert alert-primary" role="alert">
+                @ViewData["ThembiThieu"]
+                </div>
+                } *@
+                @* asp-for la truyen du lieu qua controller thay vi dung name *@
+                <label asp-for="ProductName" for="productname" class="form-label fw-bolder">Ten San Pham</label>
+                <input asp-for="ProductName" type="text" class="form-control" id="productname" value="@Model.ProductName" aria-describedby="text">
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            <div class="mb-4">
+                <label asp-for="Price" for="price" class="form-label fw-bolder">Gia Tien</label>
+                <input asp-for="Price" type="text" class="form-control" id="price" value="@Model.Price" aria-describedby="text">
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            @*             <div class="mb-4">
+            <label asp-for="Images" for="hinhanh" class="form-label fw-bolder">Ảnh</label>
+            <div class="d-flex justify-content-center align-items-center py-2">
+            <img id="showimage0" style="width: 477px; height: 477px;" src="~/images/noimage1.jpg" alt="..." />
+            <img id="showimage1" style="width: 477px; height: 477px;" src="~/images/noimage1.jpg" alt="..." />
+            <img id="showimage2" style="width: 477px; height: 477px;" src="~/images/noimage1.jpg" alt="..." />
+            </div>
+            <input asp-for="Images" type="file" class="form-control" id="image" onchange="readURL(this)" aria-describedby="image" multiple>
+            <span asp-validation-for="Images" class="text-danger"></span>
+            </div> *@
+            <!--Cai nay la su dung inputimagecss-->
+            <div id="ahihi" class="container">
+                <input asp-for="Images" type="file" id="file-input" accept="image/png, image/jpeg" onchange="preview()" multiple>
+                <span asp-validation-for="Images" class="text-danger"></span>
+                <label for="file-input">
+                    <i class="fas fa-upload"></i> &nbsp; Choose A Photo
+                </label>
+                <p id="num-of-files">No Files Chosen</p>
+                <div id="images"></div>
+            </div>
+            <div id="Editimage">
+                <div id="ahihi" class="container">
+                    <div id="images">
+                        @for (int i = 0; i < Model.Images.Count; i++)
+                        {
+                            string Url = "http://localhost:5098/";
+                            <figure>
+                            <img src="@Url@Model.Images[i].UrlImage" />
+                            </figure>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Detail" for="detail" class="form-label fw-bolder">Chi Tiet</label>
+                <input asp-for="Detail" type="text" class="form-control" id="detail" value="@Model.Detail" aria-describedby="text">
+                <span asp-validation-for="Detail" class="text-danger"></span>
+
+            </div>
+            <div class="mb-4">
+                <label asp-for="Material" for="material" class="form-label fw-bolder">Chất Liệu</label>
+                <input asp-for="Material" type="text" class="form-control" id="material" value="@Model.Material" aria-describedby="text">
+                <span asp-validation-for="Material" class="text-danger"></span>
+
+            </div>
+            <div class="mb-4">
+                <label asp-for="Size" for="size" class="form-label fw-bolder">Kich Thuoc</label>
+                <input asp-for="Size" type="text" class="form-control" id="size" value="@Model.Size" aria-describedby="text">
+                <span asp-validation-for="Size" class="text-danger"></span>
+
+            </div>
+            <hr />
+            <div class="d-flex align-items-center justify-content-center my-5 gap-5">
+                <button type="submit" id="themgiohang" class="btn btn-primary px-4 py-2">Thêm thông tin</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // nay la de luc upload hinh thi se hien len cai hinh, neu muon upload nhieu hinh thi bo cai input.files[0]
+    //cau ma  if (input.files && input.files[0]) la do xem co hinh dau voi hinh ke tiep ko co thi no moi thuc hien
+    //FileReader dung de doc file
+    // function readURL(input) {
+    //     if (input.files.length > 0) {
+    //         input.files.map((item, index) => {
+    //             var reader = new FileReader();
+    //             reader.onload = function (e) {
+    //                 $('#showimage' + index).attr('src', e.target.result).width(477).height(477); //jquery thuong co dau $, # = id hinh anh, attr('src', e.target.result) la doc hinh roi up len lai cai src
+    //             };
+    //             reader.readAsDataURL(item);
+    //         });
+    //     }
+    // }
+
+    let fileInput = document.getElementById("file-input");
+    let imageContainer = document.getElementById("images");
+    let numOfFiles = document.getElementById("num-of-files");
+
+    function preview() {
+        imageContainer.innerHTML = "";
+        numOfFiles.textContent = `${fileInput.files.length} Files Selected`;
+
+        for (i of fileInput.files) {
+            let reader = new FileReader();
+            let figure = document.createElement("figure");
+            let figCap = document.createElement("figcaption");
+            figCap.innerText = i.name;
+            figure.appendChild(figCap);
+            reader.onload = () => {
+                let img = document.createElement("img");
+                img.setAttribute("src", reader.result);
+                figure.insertBefore(img, figCap);
+            }
+            imageContainer.appendChild(figure);
+            reader.readAsDataURL(i);
+        }
+        document.getElementById("Editimage").remove();
+    }
+</script>
+
+
+

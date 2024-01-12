@@ -1,5 +1,4 @@
-﻿@model IEnumerable<TonThatCamTuanDeAn.Models.Product>
-
+﻿@model List<TonThatCamTuanDeAn.Models.Product.ViewModelProduct>
 
 <!-- Start Hero Section -->
 <div class="hero">
@@ -35,24 +34,28 @@
         <div class="row">
             @if (Model != null)
             {
+                string Url = "http://localhost:5098";
                 foreach (var item in Model)
                 {
-                        <div class="col-12 col-md-4 col-lg-3 mb-5">
-                            <a class="product-item" asp-area="" asp-controller="Shop" asp-action="ChiTietSanPham" asp-route-id="@item.Id">
-                                <img src="@item.Image" class="img-fluid product-thumbnail">
-                                <h3 class="product-title">@item.ProductName</h3>
-                                <strong class="product-price">$@item.Price</strong>
-                                <span class="icon-cross">
-                                    <img src="images/cross.svg" class="img-fluid">
-                                </span>
-                            </a>
-                        </div>
+                    <div class="col-12 col-md-4 col-lg-3 mb-5">
+                        <a class="product-item" asp-area="" asp-controller="Shop" asp-action="ChiTietSanPham" asp-route-id="@item.Id">
+                            <img src="@Url@item.Images[0].UrlImage" class="img-fluid product-thumbnail">
+
+                            <h3 class="product-title">@item.ProductName</h3>
+                            <strong class="product-price">$@item.Price</strong>
+                            <span class="icon-cross">
+                                <img src="images/cross.svg" class="img-fluid">
+                            </span>
+                        </a>
+                    </div>
                 }
             }
+
+
             @* <!-- Start Column 1 -->
             <div class="col-12 col-md-4 col-lg-3 mb-5">
             <a class="product-item" href="#">
-            <img src="images/product-1.png" class="img-fluid product-thumbnail">
+            
             <h3 class="product-title">@Model.</h3>
             <strong class="product-price">$50.00</strong>
 
@@ -158,7 +161,3 @@
         </div>
     </div>
 </div>
-
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/tiny-slider.js"></script>
-<script src="js/custom.js"></script>

@@ -19,7 +19,7 @@
                 }
                 return urlPath;
             }
-            return "\\images\\noimage.jpg";
+            return null;
 
         }
 

@@ -4,7 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - TonThatCamTuanDeAn</title>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+	@* Rang sua m oi *@
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/TonThatCamTuanDeAn.styles.css" asp-append-version="true" />
+	<link href="~/Usertemp/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+	<link href="~/Usertemp/css/tiny-slider.css" rel="stylesheet">
+	<link href="~/Usertemp/css/style.css" rel="stylesheet">
+@*     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.rtl.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
@@ -14,7 +23,7 @@
     <link href="~/css/tiny-slider.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link href="~/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="~/TonThatCamTuanDeAn.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TonThatCamTuanDeAn.styles.css" asp-append-version="true" /> *@
     
 </head>
 <body>
@@ -51,16 +60,21 @@
                 <div class="collapse navbar-collapse" id="navbarsFurni">
                     <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
                         <li>
-                            <a class="nav-link" href="/admin">Admin</a>
+                            <a class="nav-link" asp-area="admin" asp-controller="product" asp-action="index">Admin</a>
                         </li>
                         <li>
                             <a class="nav-link" href="/home">Home</a>
                         </li>
-                        <li><a class="nav-link" href="/shop">Shop</a></li>
+                        <li><a class="nav-link" asp-area="" asp-controller="shop" asp-action="Index">Shop</a></li>
                         <li><a class="nav-link" href="about.html">About us</a></li>
                         <li><a class="nav-link" href="services.html">Services</a></li>
                         <li><a class="nav-link" href="blog.html">Blog</a></li>
                         <li><a class="nav-link" href="contact.html">Contact us</a></li>
+						@* <li><a class="nav-link" asp-area="admin" asp-controller="taikhoan" asp-action="DangNhap">Dang Nhap</a></li>
+						<li><a class="nav-link" asp-area="admin" asp-controller="taikhoan" asp-action="DangKy">Dang Ky</a></li> *@
+						<div>
+							<partial name="_LoginPartial" />
+						</div>
                     </ul>
 
                     <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
@@ -187,9 +201,9 @@
             &copy; 2023 - TonThatCamTuanDeAn - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer> *@
-	<script src="js/bootstrap.bundle.min.js"></script>
-	<script src="js/tiny-slider.js"></script>
-	<script src="js/custom.js"></script>
+	<script src="~/Usertemp/js/bootstrap.bundle.min.js"></script>
+	<script src="~/Usertemp/js/tiny-slider.js"></script>
+	<script src="~/Usertemp/js/custom.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

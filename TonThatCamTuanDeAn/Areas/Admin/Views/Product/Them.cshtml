@@ -1,8 +1,9 @@
-﻿@{
+﻿@model TonThatCamTuanDeAn.Models.Product.InputProduct
+
+@{
     ViewData["Title"] = "Them";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
 
 <div class="d-flex justify-content-center">
     <div class="col-6 px-5 pt-5 border rounded-3 shadow-lg">
@@ -10,38 +11,60 @@
         <hr />
         <form action="them" method="post" enctype="multipart/form-data">
             <div class="mb-4">
-                @if (ViewData["ThembiThieu"] != "")
+                @*  @if (ViewData["ThembiThieu"] != "")
                 {
-                    <div class="alert alert-primary" role="alert">
-                        @ViewData["ThembiThieu"]
-                    </div>
-                }
-
-                <label for="productname" class="form-label fw-bolder">Ten San Pham</label>
-                <input type="text" class="form-control" id="productname" name="productname" value="" aria-describedby="text">
-            </div>
-            <div class="mb-4">
-                <label for="price" class="form-label fw-bolder">Gia Tien</label>
-                <input type="number" class="form-control" id="price" name="price" value="" aria-describedby="text">
-            </div>
-            <div class="mb-4">
-                <label for="hinhanh" class="form-label fw-bolder">Ảnh</label>
-                <div class="d-flex justify-content-center align-items-center py-2">
-                    <img id="showimage" style="width: 477px; height: 477px;" src="~/images/noimage1.jpg" alt="..." />
+                <div class="alert alert-primary" role="alert">
+                @ViewData["ThembiThieu"]
                 </div>
-                <input type="file" class="form-control" id="image" name="image" onchange="readURL(this)" aria-describedby="image">
+                } *@
+                @* asp-for la truyen du lieu qua controller thay vi dung name *@
+                <label asp-for="ProductName" for="productname" class="form-label fw-bolder">Ten San Pham</label>
+                <input asp-for="ProductName" type="text" class="form-control" id="productname" value="" aria-describedby="text">
+                <span asp-validation-for="ProductName" class="text-danger"></span>
             </div>
             <div class="mb-4">
-                <label for="detail" class="form-label fw-bolder">Chi Tiet</label>
-                <input type="text" class="form-control" id="detail" name="detail" value="" aria-describedby="text">
+                <label asp-for="Price" for="price" class="form-label fw-bolder">Gia Tien</label>
+                <input asp-for="Price" type="text" class="form-control" id="price" value="" aria-describedby="text">
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+@*             <div class="mb-4">
+                <label asp-for="Images" for="hinhanh" class="form-label fw-bolder">Ảnh</label>
+                <div class="d-flex justify-content-center align-items-center py-2">
+                    <img id="showimage0" style="width: 477px; height: 477px;" src="~/images/noimage1.jpg" alt="..." />
+                    <img id="showimage1" style="width: 477px; height: 477px;" src="~/images/noimage1.jpg" alt="..." />
+                    <img id="showimage2" style="width: 477px; height: 477px;" src="~/images/noimage1.jpg" alt="..." />
+                </div>
+                <input asp-for="Images" type="file" class="form-control" id="image" onchange="readURL(this)" aria-describedby="image" multiple>
+                <span asp-validation-for="Images" class="text-danger"></span>
+            </div> *@
+            <!--Cai nay la su dung inputimagecss-->
+            <div id="ahihi" class="container">
+                <input asp-for="Images" type="file" id="file-input" accept="image/png, image/jpeg" onchange="preview()" multiple>
+                <span asp-validation-for="Images" class="text-danger"></span>
+                <label for="file-input">
+                    <i class="fas fa-upload"></i> &nbsp; Choose A Photo
+                </label>
+                <p id="num-of-files">No Files Chosen</p>
+                <div id="images"></div>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Detail" for="detail" class="form-label fw-bolder">Chi Tiet</label>
+                <input asp-for="Detail" type="text" class="form-control" id="detail" value="" aria-describedby="text">
+                <span asp-validation-for="Detail" class="text-danger"></span>
+
             </div>
             <div class="mb-4">
-                <label for="material" class="form-label fw-bolder">Chất Liệu</label>
-                <input type="text" class="form-control" id="material" name="material" value="" aria-describedby="text">
+                <label asp-for="Material" for="material" class="form-label fw-bolder">Chất Liệu</label>
+                <input asp-for="Material" type="text" class="form-control" id="material" value="" aria-describedby="text">
+                <span asp-validation-for="Material" class="text-danger"></span>
+
             </div>
             <div class="mb-4">
                 <label asp-for="Size" for="size" class="form-label fw-bolder">Kich Thuoc</label>
                 <input asp-for="Size" type="text" class="form-control" id="size" value="" aria-describedby="text">
+                <span asp-validation-for="Size" class="text-danger"></span>
+
             </div>
             <hr />
             <div class="d-flex align-items-center justify-content-center my-5 gap-5">
@@ -55,13 +78,39 @@
     // nay la de luc upload hinh thi se hien len cai hinh, neu muon upload nhieu hinh thi bo cai input.files[0]
     //cau ma  if (input.files && input.files[0]) la do xem co hinh dau voi hinh ke tiep ko co thi no moi thuc hien
     //FileReader dung de doc file
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#showimage').attr('src', e.target.result).width(477).height(477); //jquery thuong co dau $, # = id hinh anh, attr('src', e.target.result) la doc hinh roi up len lai cai src
-            };
-            reader.readAsDataURL(input.files[0]);
+    // function readURL(input) {
+    //     if (input.files.length > 0) {
+    //         input.files.map((item, index) => {
+    //             var reader = new FileReader();
+    //             reader.onload = function (e) {
+    //                 $('#showimage' + index).attr('src', e.target.result).width(477).height(477); //jquery thuong co dau $, # = id hinh anh, attr('src', e.target.result) la doc hinh roi up len lai cai src
+    //             };
+    //             reader.readAsDataURL(item);
+    //         });
+    //     }
+    // }
+
+    let fileInput = document.getElementById("file-input");
+    let imageContainer = document.getElementById("images");
+    let numOfFiles = document.getElementById("num-of-files");
+
+    function preview() {
+        imageContainer.innerHTML = "";
+        numOfFiles.textContent = `${fileInput.files.length} Files Selected`;
+
+        for (i of fileInput.files) {
+            let reader = new FileReader();
+            let figure = document.createElement("figure");
+            let figCap = document.createElement("figcaption");
+            figCap.innerText = i.name;
+            figure.appendChild(figCap);
+            reader.onload = () => {
+                let img = document.createElement("img");
+                img.setAttribute("src", reader.result);
+                figure.insertBefore(img, figCap);
+            }
+            imageContainer.appendChild(figure);
+            reader.readAsDataURL(i);
         }
     }
 </script>

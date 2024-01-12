@@ -1,0 +1,51 @@
+
+#ahihi.container{
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+font-family: "Rubik",sans-serif;
+}
+#ahihi input[type="file"]{
+    margin: 0;
+    display: none;
+}
+#ahihi label{
+    margin: 0;
+    display: block;
+    position: relative;
+    background-color: #025bee;
+    color: #ffffff;
+    text-align: center;
+    padding: 18px 0;
+    margin: auto;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#ahihi.container p{
+    margin: 0;
+    text-align: center;
+    margin: 20px 0 30px 0;
+}
+#ahihi #images{
+    margin: 0;
+    width: 90%;
+    position: relative;
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+#ahihi figure{
+    margin: 0;
+    width: 45%;
+}
+#ahihi img{
+    margin: 0;
+    width: 100%;
+}
+#ahihi figcaption{
+    margin: 0;
+    text-align: center;
+    margin-top: 0.5vmin;
+}
