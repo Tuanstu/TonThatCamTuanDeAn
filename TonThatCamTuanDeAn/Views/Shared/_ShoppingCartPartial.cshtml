@@ -1,0 +1,308 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <img src="~/images/cart.svg">
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header" style="color: white; background-color:#3B5750">
+                <h2 class="modal-title" id="exampleModalLabel">Cart</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="location.reload()" aria-label="Close" style="background-color: #F9BF29 "></button>
+            </div>
+            <div class="modal-body">
+
+
+
+
+                <div class="untree_co-section before-footer-section">
+                    <div class="container">
+                        <div class="row mb-5">
+                            <form class="col-md-12" method="post">
+                                <div class="site-blocks-table">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="product-thumbnail">Image</th>
+                                                <th class="product-name">Product</th>
+                                                <th class="product-price">Price</th>
+                                                <th class="product-quantity">Quantity</th>
+
+                                                <th class="product-remove">Remove</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody name="cart-items">
+
+                                            @*  <tr name="cart-row">
+                                            <td class="product-thumbnail">
+                                            <img src="images/product-1.png" alt="Image" class="img-fluid">
+                                            </td>
+                                            <td class="product-name">
+                                            <h2 class="h5 text-black">Product 1</h2>
+                                            </td>
+                                            <td>49</td>
+                                            <td>
+                                            <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
+
+                                            <input name="cart_quantity_input" type="number" class="form-control text-center quantity-amount"  value="1" aria-label="Example text with button addon" aria-describedby="button-addon1">
+
+                                            </div>
+
+                                            </td>
+                                            <td name="cart-price">49</td>
+                                            <td><a class="btn btn-black btn-sm" name="removeCart">X</a></td>
+                                            </tr> *@
+
+                                            @*                                             <tr>
+                                            <td class="product-thumbnail">
+                                            <img src="images/product-2.png" alt="Image" class="img-fluid">
+                                            </td>
+                                            <td class="product-name">
+                                            <h2 class="h5 text-black">Product 2</h2>
+                                            </td>
+                                            <td>$49.00</td>
+                                            <td>
+                                            <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
+                                            <div class="input-group-prepend">
+                                            <button class="btn btn-outline-black decrease" type="button">&minus;</button>
+                                            </div>
+                                            <input type="text" class="form-control text-center quantity-amount" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                            <div class="input-group-append">
+                                            <button class="btn btn-outline-black increase" type="button">&plus;</button>
+                                            </div>
+                                            </div>
+
+                                            </td>
+                                            <td>$49.00</td>
+                                            <td><a class="btn btn-black btn-sm" name="removeCart" >X</a></td>
+                                            </tr> *@
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <div class="row">
+                                    <div class="col-md-12" name="contact">
+                                        <label class="text-black h4" for="coupon">Contact</label>
+
+                                    </div>
+                                    <div class="col-md-8 mb-3 mb-md-0">
+                                        <p>Name</p>
+                                        <input type="text" class="form-control py-3" name="name" placeholder="Name" required>
+
+
+                                    </div>
+                                    <div class="col-md-8 mb-3 mb-md-0">
+                                        <p>Phone Number</p>
+                                        <input type="text" class="form-control py-3" name="sodienthoai" placeholder="Phone Number">
+
+                                    </div>
+                                    <div class="col-md-8 mb-3 mb-md-0">
+                                        <p>Adress</p>
+                                        <input type="text" class="form-control py-3" name="diachi" placeholder="Adress">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-5">
+                                <div class="row justify-content-end">
+                                    <div class="col-md-7">
+                                        <div class="row">
+                                            <div class="col-md-12 text-right border-bottom mb-5">
+                                                <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <span class="text-black">Subtotal</span>
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                                <strong class="text-black">$230.00</strong>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-5">
+                                            <div class="col-md-6">
+                                                <span class="text-black">Total</span>
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                                <strong class="text-black" name="cart-total-price"></strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="getOrderitems()">Place Order</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    showinCart()
+    updateCartTotal()
+    function showinCart() {
+        if (JSON.parse(localStorage.getItem("listofnames")) != null) {
+            var temp = JSON.parse(localStorage.getItem("listofnames"))
+            var position = -1
+            for (var i = 0; i < temp.length; i++) {
+                position++
+                var product = JSON.parse(localStorage.getItem(temp[i]))
+                var cartRow = document.createElement('tr')
+                cartRow.setAttribute("name", "cart-row")
+
+                var cartRowContents =
+                    `
+                                                                              <td class="product-thumbnail">
+                                                                                                <img src="${product.imageSrc}" alt="Image" class="img-fluid">
+                                                                                        </td>
+                                                                                        <td class="product-name">
+                                                                                                    <h2 class="h5 text-black">${product.title}</h2>
+
+                                                                                        </td>
+                                                                                            <td  name="cart-price">${product.price}</td>
+                                                                                        <td>
+
+                                                                                            <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px; margin: auto">
+
+                                                                                                    <input name="cart_quantity_input" type="number" class="form-control text-center quantity-amount" value="1" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                                                                                        <input name ="product_id" style="display: none" value="${product.id}">
+
+                                                                                            </div>
+
+                                                                                        </td>
+
+                                                                                            <td><a class="btn btn-black btn-sm"  id="${position}" name="removeCart">X</a></td>
+                   `
+                cartRow.innerHTML = cartRowContents
+
+                document.getElementsByName('cart-items')[0].append(cartRow)
+            }
+            var removeCartItem = document.getElementsByName('removeCart')
+            console.log(removeCartItem)
+            for (var i = 0; i < removeCartItem.length; i++) {
+                var remove = removeCartItem[i]
+                remove.addEventListener('click', function (event) {
+                    console.log("ok chua")
+
+                    var buttonClicked = event.target
+                    var array = JSON.parse(localStorage.getItem("listofnames"))
+                    array.splice(Number(event.target.id), 1)
+                    console.log(array)
+                    localStorage.removeItem("listofnames")
+                    localStorage.setItem("listofnames", JSON.stringify(array))
+                    buttonClicked.parentElement.parentElement.remove()
+                    updateCartTotal()
+
+                })
+
+            }
+
+            // function removeCartItem(event) {
+            //     console.log("ok chua")
+            //         var buttonClicked = event.target
+            //         buttonClicked.parentElement.parentElement.remove()
+            //     updateCartTotal()
+            // }
+            var quantityInputs = document.getElementsByName('cart_quantity_input')
+            for (var i = 0; i < quantityInputs.length; i++) {
+                var input = quantityInputs[i]
+                console.log(input)
+                console.log("pls work")
+                input.addEventListener('change', function (event) {
+
+                    var input = event.target
+                    if (isNaN(input.value) || input.value <= 0) {
+                        input.value = 1
+                    }
+                    updateCartTotal()
+                })
+            }
+
+
+
+        }
+        else {
+            console.log("no product yet")
+        }
+
+    }
+    function updateCartTotal() {
+        console.log("ahihihi")
+        var cartItemContainer = document.getElementsByName('cart-items')[0]
+        var cartRows = document.getElementsByName('cart-row')
+        console.log("okela")
+        let total = 0
+        for (var i = 0; i < cartRows.length; i++) {
+            var cartRow = cartRows[i]
+            var priceElement = document.getElementsByName('cart-price')[i]
+            console.log(priceElement)
+            var quantityElement = document.getElementsByName("cart_quantity_input")[i]
+            console.log(quantityElement)
+            var price = parseFloat(priceElement.innerHTML)
+            console.log(price)
+            var quantity = parseFloat(quantityElement.value)
+            console.log(quantity)
+            total = price * quantity + total
+            console.log(total)
+        }
+        document.getElementsByName('cart-total-price')[0].innerText = total
+    }
+
+
+    function getOrderitems() {
+        var ids = JSON.parse(localStorage.getItem("listofnames"))
+        var quantities = []
+        var orderitems = []
+        for (var a = 0; a < document.getElementsByName("cart_quantity_input").length; a++) {
+            var quantity = document.getElementsByName("cart_quantity_input")[a].value
+            quantities.push(quantity)
+            // var Orderitems = {
+            //     productid: ids[a],
+            //         quantity: quantities[a]
+            // }
+            // orderitems.push(Orderitems)
+
+        }
+        // console.log(orderitems)
+        if (document.getElementsByName("name")[0].value != "" && document.getElementsByName("sodienthoai")[0].value != "" && document.getElementsByName("diachi")[0].value != "") {
+            
+            $.ajax({
+                type: "POST",
+                traditional: true,
+                url: '@Url.Action("Index", "GioHang")',
+                data: {
+                    ProductId: JSON.stringify(ids),
+                    ProductQuantity: JSON.stringify(quantities),
+                    UserName: document.getElementsByName("name")[0].value,
+                    Sodienthoai: document.getElementsByName("sodienthoai")[0].value,
+                    Diachi: document.getElementsByName("diachi")[0].value,
+                    Ngaytao: new Date()
+                }
+            });
+            
+            document.getElementsByName("contact")[0].innerHTML = `<label class="text - black h4" for="coupon">Contact</label>`
+            window.location.href = "/Thankyou"
+            localStorage.clear()
+        }
+        else {
+
+            document.getElementsByName("contact")[0].innerHTML = `<label class="text - black h4" for="coupon" style="color: red">Contact (xin hay nhap day du thong tin)</label>`
+        }
+        
+
+    }
+</script>

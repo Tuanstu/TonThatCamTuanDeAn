@@ -60,7 +60,7 @@
                 <div class="collapse navbar-collapse" id="navbarsFurni">
                     <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
                         <li>
-                            <a class="nav-link" asp-area="admin" asp-controller="product" asp-action="index">Admin</a>
+                            <a class="nav-link" asp-area="admin" asp-controller="product">Admin</a>
                         </li>
                         <li>
                             <a class="nav-link" href="/home">Home</a>
@@ -79,7 +79,9 @@
 
                     <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
                         <li><a class="nav-link" href="#"><img src="~/images/user.svg"></a></li>
-                        <li><a class="nav-link" href="cart.html"><img src="~/images/cart.svg"></a></li>
+						<li>
+							<partial name="_ShoppingCartPartial" />
+						</li>
                     </ul>
                 </div>
             </div>
@@ -88,7 +90,7 @@
         <!-- End Header/Navigation -->
     </header>
 
-    <div class="container">
+    <div >
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
